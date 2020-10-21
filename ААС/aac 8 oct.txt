@@ -1,0 +1,26 @@
+Есть одинаковое число гаек и болтов. Все гайки и болты разного размера. Для каждого болта определенного размера есть одна гайка соответствующего размера. 
+Два массива, состоящих из одинаковых элементов, но перемешаны. 
+Отсортировать два массива. Сравнивать можно только элементы двух массивов.
+
+
+#include <iostream>
+#include <vector>
+
+int partition(int* a, int num, int left, int right) {
+  
+}
+
+void sortTwoArrays(int* a, int* b, int left, int right) {
+  if (left < right) {
+    int num = a[left];
+    int partIndex = partition(b, num, left, right);
+    swap(a, left, partIndex);
+    partition(a, num, left, right);
+    sortTwoArrays(a, b, left, partIndex - 1);
+    sortTwoArrays(a, b, partIndex + 1, right);
+  }
+}
+
+int main() {
+  
+}
