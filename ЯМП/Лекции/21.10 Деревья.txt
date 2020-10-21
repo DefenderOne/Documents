@@ -1,0 +1,83 @@
+Обходы деревьев
+Нерекурсивный способ (с использованием стека)
+int countEvenStack(Tree t) {
+	Stack s;
+	int evenCount = 0;
+	Treet p = t;
+	while (p != nullptr) {
+		if (p->info % 2 == 0)
+			evenCount++;
+		if (p->left != nullptr) {
+			if (p->right != nullptr)
+				s.push(p->right);
+			p = p->left;
+		}
+		else {
+			if (p->right != nullptr)
+				p = p->right;
+			else
+				if (s.Empty())
+					p = nullptr;
+				else
+					p = s.pop();
+		}
+}
+
+std::cout << countEvenStack(BT.GetTree());
+
+Нерекурсивный способ (с использованием очереди)
+int countEvenQueue(Tree t) {
+	Queue q;
+	int evenCount = 0;
+	Tree p = t;
+	q.Enqueue(t);
+	while (!q.Empty()) {
+		p = q.Dequeue();
+		if (p->info % == 0)
+			evenCount++;
+		if (p->left != nullptr)
+			q.Enqueue(p->left);
+		if (p->right != nullptr)
+			q.Enqueue(p->right);
+	}
+	return evenCount;
+}
+
+Дерево поиска
+Все потомки абсолютно меньше текущего узла находятся слева от текущего узла, абсолютно большие - справа от текущего узла.
+
+typedef int TInfo;
+
+struct Node {
+	TInfo info;
+	int count;
+	Node* left;
+	Node* right;
+};
+
+typedef Node* Tree;
+
+void Add(Tree& t, int elem) {
+	if (t == nullptr) {
+		t = new Node;
+		t->info = elem;
+		t->count = 1;
+		t->left = nullptr;
+		t->right = nullptr;
+	} else
+		if (elem < t->info)
+			Add(t->left, elem);
+		else
+			if (elem > t->info)
+				Add(t->right, elem);
+			else
+				t->count++;
+}
+
+void printOrder(Tree t) {
+	if (t != nullptr) {
+		printOrder(t->left);
+		for (int i = 1; i <= t->count; i++) {
+			std::cout << t->info;
+		printOrder(t->right);
+}
